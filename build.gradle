@@ -5,6 +5,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'application'
 
 ext {
     googleCloudDataflowJavaSdkVersion = '2.4.0'
@@ -18,6 +19,8 @@ repositories {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+mainClassName = "io.suryawirawan.henry.beam.StarterPipeline"
 
 dependencies {
     compile "com.google.cloud.dataflow:google-cloud-dataflow-java-sdk-all:${googleCloudDataflowJavaSdkVersion}"
