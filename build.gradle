@@ -1,11 +1,20 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'application'
+
+mainClassName = 'io.suryawirawan.henry.beam.StarterPipeline'
+
+apply plugin: 'com.github.johnrengelman.shadow'
 
 ext {
     googleCloudDataflowJavaSdkVersion = '2.4.0'
@@ -19,8 +28,6 @@ repositories {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-mainClassName = "io.suryawirawan.henry.beam.StarterPipeline"
 
 dependencies {
     compile "com.google.cloud.dataflow:google-cloud-dataflow-java-sdk-all:${googleCloudDataflowJavaSdkVersion}"
