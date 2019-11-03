@@ -1,39 +1,48 @@
 buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
 
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
-    }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+  }
 }
 
-apply plugin: 'java'
-apply plugin: 'application'
-
-mainClassName = 'io.suryawirawan.henry.beam.StarterPipeline'
+plugins {
+  id 'java'
+  id 'application'
+}
 
 apply plugin: 'com.github.johnrengelman.shadow'
 
-ext {
-    googleCloudDataflowJavaSdkVersion = '2.4.0'
-    jodaTimeVersion = '2.9.9'
-	slf4jVersion = '1.7.25'
-}
-
-repositories {
-    mavenCentral()
-}
+group 'io.suryawirawan.henry.beam'
+version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-dependencies {
-    compile "com.google.cloud.dataflow:google-cloud-dataflow-java-sdk-all:${googleCloudDataflowJavaSdkVersion}"
-    compile "joda-time:joda-time:${jodaTimeVersion}"
-    compile "org.slf4j:slf4j-api:${slf4jVersion}"
-    compile "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+mainClassName = 'io.suryawirawan.henry.beam.StarterPipeline'
 
-    testCompile 'junit:junit'
+ext {
+  beamSdkVersion = '2.15.0'
+  jodaTimeVersion = '2.10.4'
+  slf4jVersion = '1.7.28'
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile "org.apache.beam:beam-sdks-java-core:${beamSdkVersion}"
+  compile "org.apache.beam:beam-sdks-java-io-google-cloud-platform:${beamSdkVersion}"
+  runtime "org.apache.beam:beam-runners-direct-java:${beamSdkVersion}"
+  runtime "org.apache.beam:beam-runners-google-cloud-dataflow-java:${beamSdkVersion}"
+
+  compile "joda-time:joda-time:${jodaTimeVersion}"
+  compile "org.slf4j:slf4j-api:${slf4jVersion}"
+  compile "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+
+  testCompile 'junit:junit'
 }
